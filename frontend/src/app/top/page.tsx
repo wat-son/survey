@@ -11,6 +11,7 @@ import {
     Paper,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Header from '@/components/Header';
 
 function SurveyAccordion({ title, content }: { title: string; content: string }) {
     return (
@@ -91,15 +92,23 @@ export default function TopPage() {
     const [tabIndex, setTabIndex] = useState(0);
 
     return (
-    <Box sx={{ width: '100%', p: 3 }}>
-        <Tabs value={tabIndex} onChange={(e, newVal) => setTabIndex(newVal)} centered>
-        <Tab label="アンケート回答" />
-        <Tab label="アンケート作成" />
-        </Tabs>
-        <Box sx={{ mt: 4 }}>
-        {tabIndex === 0 && <AnswerTabPanel />}
-        {tabIndex === 1 && <CreateTabPanel />}
-        </Box>
-    </Box>
+        <>
+            <Header breadcrumbItems={[
+                { label: 'アンケート一覧', href: '/'},
+                { label: 'アンケート作成' }
+            ]}
+            user={{ id: 'u00123', name: '山田太郎'}}
+            />
+            <Box sx={{ width: '100%', p: 3 }}>
+                <Tabs value={tabIndex} onChange={(e, newVal) => setTabIndex(newVal)} centered>
+                <Tab label="アンケート回答" />
+                <Tab label="アンケート作成" />
+                </Tabs>
+                <Box sx={{ mt: 4 }}>
+                {tabIndex === 0 && <AnswerTabPanel />}
+                {tabIndex === 1 && <CreateTabPanel />}
+                </Box>
+            </Box>
+        </>
     );
 }
